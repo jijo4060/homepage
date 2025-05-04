@@ -14,7 +14,7 @@ const Contact: NextPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    formData["access_key"] = "342066c4-bf4c-4e3e-9966-738b741db278";
+    formData["access_key"] = process.env.ACCESS_KEY_SEND
     const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
