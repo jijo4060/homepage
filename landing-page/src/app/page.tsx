@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
+import HeaderMenu from '@components/HeaderMenu';
+import MobileMenu from '@components/MobileMenu';
 
 const HomePage: NextPage = () => {
-  const [search, setSearch] = useState('');
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-row">
-      <aside className="w-48 bg-gray-200 p-4 flex flex-col space-y-4">
-        <Link href="/" className="text-blue-700 font-semibold hover:underline">🏠 Home</Link>
-        <Link href="/about" className="text-blue-700 font-semibold hover:underline">👤 About Me</Link>
-        <Link href="/blog" className="text-blue-700 font-semibold hover:underline">📝 Blog</Link>
-        <Link href="/contact" className="text-blue-700 font-semibold hover:underline">📬 Contact</Link>
-      </aside>
+    <div className="min-h-screen bg-white text-gray-900 font-sans">
+      <HeaderMenu toggleMenu={toggleMenu} />
+      <MobileMenu isOpen={menuOpen} toggle={toggleMenu} />
 
       <main className="flex-1 flex flex-col items-center justify-center text-center px-4 py-10">
         <h1 className="text-6xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 drop-shadow-md">Hi, I'm Jobin Joseph</h1>

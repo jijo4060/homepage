@@ -1,12 +1,16 @@
 "use client";
 
 import { useState } from 'react';
-import Link from 'next/link';
 import type { NextPage } from 'next';
+import HeaderMenu from '@components/HeaderMenu';
+import MobileMenu from '@components/MobileMenu';
 
 const Contact: NextPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', access_key: '' });
   const [status, setStatus] = useState('');
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,12 +18,13 @@ const Contact: NextPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    formData["access_key"] = process.env.ACCESS_KEY_SEND
-    const res = await fetch("https://api.web3forms.com/submit", {
+  
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     });
+  
     if (res.ok) {
       setStatus('Message sent!');
       setFormData({ name: '', email: '', message: '', access_key: '' });
@@ -29,13 +34,9 @@ const Contact: NextPage = () => {
   };
 
   return (   
-    <div className="min-h-screen bg-gray-50 flex flex-row">
-      <aside className="w-48 bg-gray-200 p-4 flex flex-col space-y-4">
-        <Link href="/" className="text-blue-700 font-semibold hover:underline">🏠 Home</Link>
-        <Link href="/about" className="text-blue-700 font-semibold hover:underline">👤 About Me</Link>
-        <Link href="/blog" className="text-blue-700 font-semibold hover:underline">📝 Blog</Link>
-        <Link href="/contact" className="text-blue-700 font-semibold hover:underline">📬 Contact</Link>
-      </aside>
+    <div className="min-h-screen bg-white text-gray-900 font-sans">
+      <HeaderMenu toggleMenu={toggleMenu} />
+      <MobileMenu isOpen={menuOpen} toggle={toggleMenu} />
 
       <main className="flex-1 flex flex-col items-center justify-center text-center px-4 py-10">
       <h1 className="text-4xl font-bold mb-4">Contact Me</h1>
