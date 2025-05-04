@@ -72,7 +72,7 @@ const HomePage: NextPage = () => {
                 <iframe
                   width="100%"
                   height="350"
-                  src="https://www.youtube.com/embed/videoseries?list=UUjqQ5yd2T_KvNf8zK-S98Bw"
+                  src="https://www.youtube-nocookie.com/embed?listType=playlist&list=UUjqQ5yd2T_KvNf8zK-S98Bw"
                   title="Code & Wrench - Latest Videos"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
